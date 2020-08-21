@@ -1,36 +1,74 @@
-window.addEventListener('load', ranges);
+window.addEventListener('load', () => {
+  ranges();
+});
 
-function ranges() {
+let controlRed = document.querySelector('#controlRed');
+let viewValueRed = document.querySelector('#viewValueRed');
+let controlGreen = document.querySelector('#controlGreen');
+let viewValueGreen = document.querySelector('#viewValueGreen');
+let controlBlue = document.querySelector('#controlBlue');
+let viewValueBlue = document.querySelector('#viewValueBlue');
+let controlAlfa = document.querySelector('#controlAlfa');
+let viewValueAlfa = document.querySelector('#viewValueAlfa');
+
+let controlsRgb = document.querySelector('#controlsRgb');
+let displayRgb = document.querySelector('#displayRgb');
+let viewValueRgb = document.querySelector('#viewValueRgb');
+
+function rgba(){
+  const red = controlRed.value;
+  const green = controlGreen.value;
+  const blue = controlBlue.value;
+  const alfa = controlAlfa.value;
+
+  return `rgba(${red},${green},${blue},${alfa})`
+}
+
+function ranges(){
+  
+  document.querySelector("#btnCopy").addEventListener("click",
+  () => {
+      viewValueRgb.select();
+      document.execCommand('copy');
+      document.querySelector('#alert').innerHTML = `
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Copied</strong> with success!
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+      `;
+  })
   // red
-  var rangeR = document.querySelector('input#rangeRed');
-  var numberRed = document.querySelector('input#numberRed');
-
-  // green
-  var rangeG = document.querySelector('input#rangeGreen');
-  var numberGreen = document.querySelector('input#numberGreen');
-
-  // blue
-  var rangeB = document.querySelector('input#rangeBlue');
-  var numberBlue = document.querySelector('input#numberBlue');
-
-  // boxColor
-  var boxColor = document.querySelector('div#boxColor');
-
-  // red
-  rangeR.addEventListener('input', function () {
-    numberRed.value = rangeR.value;
-    boxColor.style.backgroundColor = `rgb(${rangeR.value},${rangeG.value},${rangeB.value})`;
+  controlRed.addEventListener('input', () => {
+      viewValueRed.value = controlRed.value;
+      viewValueRgb.value = rgba();
+      // css
+      displayRgb.style.backgroundColor = rgba();
+      controlsRgb.style.boxShadow = `0 0 3rem ${rgba()}`;
   });
 
   // green
-  rangeG.addEventListener('input', function () {
-    numberGreen.value = rangeG.value;
-    boxColor.style.backgroundColor = `rgb(${rangeR.value},${rangeG.value},${rangeB.value})`;
+  controlGreen.addEventListener('input', () => {
+      viewValueGreen.value = controlGreen.value;
+      viewValueRgb.value = rgba();
+      displayRgb.style.backgroundColor = rgba();
+      controlsRgb.style.boxShadow = `0 0 3rem ${rgba()}`;
   });
 
   // blue
-  rangeB.addEventListener('input', function () {
-    numberBlue.value = rangeB.value;
-    boxColor.style.backgroundColor = `rgb(${rangeR.value},${rangeG.value},${rangeB.value})`;
+  controlBlue.addEventListener('input', () => {
+      viewValueBlue.value = controlBlue.value;
+      viewValueRgb.value = rgba();
+      displayRgb.style.backgroundColor = rgba();
+      controlsRgb.style.boxShadow = `0 0 3rem ${rgba()}`;
+  });
+
+  // alfa
+  controlAlfa.addEventListener('input', () => {
+      viewValueAlfa.value = controlAlfa.value;
+      viewValueRgb.value = rgba();
+      displayRgb.style.backgroundColor = rgba();
+      controlsRgb.style.boxShadow = `0 0 3rem ${rgba()}`;
   });
 }
